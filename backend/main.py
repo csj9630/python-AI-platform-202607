@@ -20,7 +20,14 @@ def health_check():
         "service" : "AI platform Engine",
         "message"  : "Health check successful",
     }
+@app.get("/hello")
+def hello():
 
+    return {
+
+        "message": "Hello"
+
+    }
 
 # * 실행
 # uvicorn main:app --reload
