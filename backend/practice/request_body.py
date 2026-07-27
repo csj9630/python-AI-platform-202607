@@ -16,5 +16,5 @@ class Item(BaseModel):
 # API 엔드포인트에서 데이터 읽기
 @app.post("/items")
 async def create_item(item: Item):
-    # pydantic 모델을 사용하여 request body에서 데이터를 읽고 검증하여 자료형에 맞게 변환합니다.
+    # FastAPI는 pydantic 모델을 호출하여, 요청 본문에서 JSON 데이터를 읽고, 이를 Item 모델로 변환합니다.
     return {"message": "Item created successfully", "item_data": item}
