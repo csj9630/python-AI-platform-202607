@@ -14,7 +14,8 @@ app.include_router(users.routers)
 
 '''
 # * 실행
-uvicorn module_32_self.main:app --reload
+cd module_32_self 
+=> uvicorn main:app --reload
 => uvicorn으로 module_32_self 폴더 > main.py > app 객체를 실행, 파일 수정 시 자동으로 서버 재시작
 * 확인 : localhost:8000/[url]
 '''
