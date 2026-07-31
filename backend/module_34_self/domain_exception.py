@@ -9,14 +9,13 @@ Module 34: Exception Handling과 표준 오류 응답 - 사용자 정의 Busines
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
-app = FastAPI()
-
+app = FastAPI()     
 
 # 사용자 정의 비즈니스/도메인 예외 클래스
 # Service 레이어에서 FastAPI 의존성 없이 독립적으로 예외를 정의하여 사용합니다.
 class DocmentNotFoundError(Exception):
     """문서를 찾지 못했을 때 발생시키는 비즈니스 예외"""
-    pass
+    pass        
 
 
 # 전역 Exception Handler 등록
