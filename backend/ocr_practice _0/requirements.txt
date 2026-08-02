@@ -1,0 +1,6 @@
+pytesseract
+easyocr 
+paddlepaddle 
+paddleocr 
+google-genai 
+python-dotenv
