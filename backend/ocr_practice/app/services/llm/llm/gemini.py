@@ -1,3 +1,4 @@
+# gemini.py
 import os
 from dotenv import load_dotenv
 from baseLLM import BaseLLM
@@ -5,35 +6,28 @@ from baseLLM import BaseLLM
 load_dotenv()
 
 class GeminiLLM(BaseLLM):
-    def __init__(self):
+    def __init__(self, model_name: str = "gemini-3.5-flash", temperature: float = 0.3):
+        self.model_name = model_name
+        self.temperature = temperature
         self.api_key = os.getenv("GEMINI_API_KEY")
 
-    def summarize(self, text: str) -> str:
-        if not text.strip():
-            return "요약할 텍스트가 존재하지 않습니다."
+    def generate(self, prompt: str) -> str:
         if not self.api_key:
-            return "[Gemini Error: .env 파일에 GEMINI_API_KEY가 없습니다.]"
+            return "[Gemini Error: .env 파일에 GEMINI_API_KEY가 존재하지 않습니다.]"
             
         try:
             from google import genai
             from google.genai import types
             
             client = genai.Client(api_key=self.api_key)
-            prompt = f"""
-다음은 문서에서 추출된 OCR 텍스트입니다. 
-문맥을 파악하고 오타를 보정하여 3줄로 핵심 요약을 작성해 주세요.
-
-[OCR 텍스트]
-{text}
-"""
             response = client.models.generate_content(
-                model="gemini-3.5-flash-lite",
+                model=self.model_name,
                 contents=prompt,
                 config=types.GenerateContentConfig(
-                    temperature=0.3,
+                    temperature=self.temperature,
                     max_output_tokens=1000
                 )
             )
             return response.text.strip()
         except Exception as e:
-            return f"[Gemini 요약 실패: {e}]"
+            return f"[Gemini Error: {e}]"

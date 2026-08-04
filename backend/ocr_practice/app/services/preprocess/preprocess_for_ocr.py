@@ -18,7 +18,6 @@ def preprocess_for_ocr(image_path):
     return img
 
 
-
 def apply_thresholding(image_path):
     # OpenCV로 이미지 로드 (그레이스케일)
     img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
